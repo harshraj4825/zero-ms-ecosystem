@@ -4,7 +4,7 @@ spring:
   application:
     name: USER-SERVICE
   zipkin:
-    base-url: http://localhost:9411
+    base-url: http://sbstjvmlx618:9411
     enabled: true
 eureka:
   client:
@@ -33,10 +33,21 @@ resilience4j:
           - java.util.concurrent.TimeoutException
           - java.io.IOException
 
+logging:
+  pattern:
+    level: %5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]
+
 management:
   tracing:
+    exporter:
+      zipkin:
+        enabled: true
     sampling:
       probability: 1.0
+    enable: true
+  zipkin:
+    tracing:
+      endpoint: http://sbstjvmlx618:9411/api/v2/spans
   endpoints:
     web:
       exposure:

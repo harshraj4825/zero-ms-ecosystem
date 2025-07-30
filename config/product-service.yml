@@ -5,6 +5,35 @@ server:
 spring:
   application:
     name: PRODUCT-SERVICE
+logging:
+  pattern:
+    level: %5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]
+
+management:
+  tracing:
+    exporter:
+      zipkin:
+        enabled: true
+    sampling:
+      probability: 1.0
+    enable: true
+  zipkin:
+    tracing:
+      endpoint: http://sbstjvmlx618:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
 
 eureka:
   client:

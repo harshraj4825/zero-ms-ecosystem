@@ -1,0 +1,16 @@
+spring:
+  port: 9001
+  datasource:
+    url: jdbc:h2:mem:///mymicroservice;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE  # You can name per service (e.g., productdb, orderdb)
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
